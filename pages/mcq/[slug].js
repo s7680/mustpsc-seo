@@ -56,11 +56,15 @@ export default function QuestionPage({ question }) {
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Question",
-              "name": rawQuestion,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": question.explanation || ""
+              "@type": "QAPage",
+              "mainEntity": {
+                "@type": "Question",
+                "name": rawQuestion,
+                "text": rawQuestion,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": question.explanation || ""
+                }
               }
             })
           }}
