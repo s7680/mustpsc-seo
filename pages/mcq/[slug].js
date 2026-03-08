@@ -36,7 +36,7 @@ export default function QuestionPage({ question }) {
 
   const rawQuestion = question.question_text || question.question || ''
 
-  const preserveLayout = /(\n|^\s*\d+\.\s|\(\d+\)|[A-D]\.\s|\([a-dA-D]\)|Assertion|Reason)/i
+  const preserveLayout = /(\n|^\s*\d+\.\s|\(\d+\)|[A-D]\.\s|Assertion|Reason)/i
     .test(rawQuestion)
 
   return (
