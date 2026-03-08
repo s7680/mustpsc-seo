@@ -51,6 +51,21 @@ export default function QuestionPage({ question }) {
           content={`Practice previous year question from ${examLabel}. Detailed explanation and answer available on MUST PSC.`}
         />
 
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Question",
+              "name": rawQuestion,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": question.explanation || ""
+              }
+            })
+          }}
+        />
+
         <meta name="google-site-verification" content="-UsCSZp4Ul3WtJydVJHoJHyIGvm1MlpiyUAGT3Qpq6U" />
       </Head>
 
