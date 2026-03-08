@@ -10,7 +10,7 @@ export const getServerSideProps = async ({ res }) => {
   while (true) {
     const { data, error } = await supabase
       .from('questions')
-      .select('slug')
+      .select('slug, topic')
       .range(from, from + batchSize - 1)
 
     if (error) break
@@ -24,6 +24,27 @@ export const getServerSideProps = async ({ res }) => {
     from += batchSize
   }
 
+  const topicSet = new Set()
+
+  questions.forEach(q => {
+    if (q.topic) {
+      const topicSlug = q.topic
+        .toLowerCase()
+        .replace(/^\d+\.\s*/, '')   // remove leading numbering like "16. "
+        .replace(/\s+/g, '-')       // convert spaces to hyphen
+        .replace(/[^a-z0-9\-]/g, '') // remove punctuation
+      topicSet.add(topicSlug)
+    }
+  })
+
+  const topicUrls = Array.from(topicSet)
+    .map(t => `
+      <url>
+        <loc>${siteUrl}/topic/${t}</loc>
+      </url>
+    `)
+    .join('')
+
   const urls = (questions || [])
     .map(q => `
       <url>
@@ -35,6 +56,7 @@ export const getServerSideProps = async ({ res }) => {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     ${urls}
+    ${topicUrls}
   </urlset>`
 
   res.setHeader('Content-Type', 'text/xml')

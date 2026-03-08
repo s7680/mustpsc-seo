@@ -92,6 +92,16 @@ export default function QuestionPage({ question }) {
         {topicClean}
       </h2>
 
+      {/* Topic Hub Link */}
+      <div className="topic-hub-link" style={{marginBottom:"20px"}}>
+        <a
+          href={`/topic/${topicClean.toLowerCase().replace(/\s+/g,'-')}`}
+          style={{textDecoration:"none"}}
+        >
+          View more questions from {topicClean}
+        </a>
+      </div>
+
       {/* Question */}
       <div className="question-text">
         {question.question_text || question.question}
