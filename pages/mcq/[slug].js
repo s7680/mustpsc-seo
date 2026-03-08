@@ -105,11 +105,7 @@ export default function QuestionPage({ question }) {
       {/* Question */}
       <div className="question-text">
         {question.question_text || question.question}
-      </div>
-
-      {/* Exam / Year */}
-      <div className="exam-info">
-        Asked in: {question.source_exam_name || question.exam}
+        {` (${question.source_exam_name || question.exam})`}
       </div>
 
       {/* Options */}
