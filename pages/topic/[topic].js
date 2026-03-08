@@ -7,15 +7,14 @@ export async function getServerSideProps(context) {
   const { topic } = context.params
   const topicName = topic.replace(/-/g, ' ')
 
-  const { data } = await supabase
+  const { data: questions } = await supabase
     .from('questions')
-    .select('slug, question_text, question')
+    .select('slug, question_text, question, topic')
     .ilike('topic', `%${topicName}%`)
-    .limit(200)
 
   return {
     props: {
-      questions: data || [],
+      questions: questions || [],
       topic: topicName
     }
   }
