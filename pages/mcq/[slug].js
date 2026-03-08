@@ -57,14 +57,14 @@ export default function QuestionPage({ question }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "FAQPage",
-              "mainEntity": [{
+              "mainEntity": {
                 "@type": "Question",
                 "name": rawQuestion,
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": question.explanation || ""
+                  "text": (question.explanation || "").toString()
                 }
-              }]
+              }
             })
           }}
         />
