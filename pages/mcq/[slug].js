@@ -34,6 +34,11 @@ export default function QuestionPage({ question }) {
     .toString()
     .replace(/\.0\b/, '')   // convert 2010.0 → 2010
 
+  const rawQuestion = question.question_text || question.question || ''
+
+  const preserveLayout = /(\n|^\s*\d+\.\s|\(\d+\)|[A-D]\.\s|\([a-dA-D]\)|Assertion|Reason)/i
+    .test(rawQuestion)
+
   return (
     <div className="page-wrapper">
       <Head>
@@ -109,9 +114,9 @@ export default function QuestionPage({ question }) {
       {/* Question */}
       <div
         className="question-text"
-        style={{ whiteSpace: "pre-wrap" }}
+        style={preserveLayout ? { whiteSpace: "pre-wrap" } : {}}
       >
-        {(question.question_text || question.question)}
+        {rawQuestion}
         {` (${examLabel})`}
       </div>
 
@@ -142,9 +147,7 @@ export default function QuestionPage({ question }) {
       {/* Explanation */}
       <div className="explanation-card">
         <strong>Explanation:</strong>
-        <div style={{ marginTop: "8px", whiteSpace: "pre-wrap" }}>
-          {question.explanation}
-        </div>
+        <p style={{marginTop:"8px"}}>{question.explanation}</p>
       </div>
 
       {/* Practice CTA */}
