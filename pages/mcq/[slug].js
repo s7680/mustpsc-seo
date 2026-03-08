@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import supabase from '../../lib/supabase'
 
 export async function getServerSideProps(context) {
@@ -31,6 +32,9 @@ export default function QuestionPage({ question }) {
 
   return (
     <div className="page-wrapper">
+      <Head>
+        <meta name="google-site-verification" content="-UsCSZp4Ul3WtJydVJHoJHyIGvm1MlpiyUAGT3Qpq6U" />
+      </Head>
 
       {/* MUST PSC Header */}
       <header>
