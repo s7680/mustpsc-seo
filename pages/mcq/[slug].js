@@ -147,7 +147,9 @@ export default function QuestionPage({ question }) {
       {/* Explanation */}
       <div className="explanation-card">
         <strong>Explanation:</strong>
-        <p style={{marginTop:"8px"}}>{question.explanation}</p>
+        <div style={{ marginTop: "8px", whiteSpace: "pre-wrap" }}>
+          {question.explanation}
+        </div>
       </div>
 
       {/* Practice CTA */}
