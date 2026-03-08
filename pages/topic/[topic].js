@@ -5,17 +5,18 @@ import Link from 'next/link'
 export async function getServerSideProps(context) {
 
   const { topic } = context.params
+  const topicName = topic.replace(/-/g, ' ')
 
   const { data } = await supabase
     .from('questions')
     .select('slug, question_text, question')
-    .ilike('topic', `%${topic}%`)
+    .ilike('topic', `%${topicName}%`)
     .limit(200)
 
   return {
     props: {
       questions: data || [],
-      topic
+      topic: topicName
     }
   }
 }
