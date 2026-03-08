@@ -30,6 +30,10 @@ export default function QuestionPage({ question }) {
     ? question.topic.replace(/^\d+\.\s*/, '')
     : ''
 
+  const examLabel = (question.source_exam_name || question.exam || '')
+    .toString()
+    .replace(/\.0\b/, '')   // convert 2010.0 → 2010
+
   return (
     <div className="page-wrapper">
       <Head>
@@ -103,9 +107,12 @@ export default function QuestionPage({ question }) {
       </div>
 
       {/* Question */}
-      <div className="question-text">
-        {question.question_text || question.question}
-        {` (${question.source_exam_name || question.exam})`}
+      <div
+        className="question-text"
+        style={{ whiteSpace: "pre-wrap" }}
+      >
+        {(question.question_text || question.question)}
+        {` (${examLabel})`}
       </div>
 
       {/* Options */}
@@ -135,7 +142,9 @@ export default function QuestionPage({ question }) {
       {/* Explanation */}
       <div className="explanation-card">
         <strong>Explanation:</strong>
-        <p style={{marginTop:"8px"}}>{question.explanation}</p>
+        <div style={{ marginTop: "8px", whiteSpace: "pre-wrap" }}>
+          {question.explanation}
+        </div>
       </div>
 
       {/* Practice CTA */}
