@@ -1,13 +1,13 @@
 import supabase from '../lib/supabase'
 
-export async function getServerSideProps({ res }) {
+export const getServerSideProps = async ({ res }) => {
   const siteUrl = 'https://seo.mustpsc.in'
 
   const { data: questions } = await supabase
     .from('questions')
     .select('slug')
 
-  const urls = questions
+  const urls = (questions || [])
     .map(q => `
       <url>
         <loc>${siteUrl}/mcq/${q.slug}</loc>
