@@ -42,6 +42,15 @@ export default function QuestionPage({ question }) {
   return (
     <div className="page-wrapper">
       <Head>
+        <title>
+          {(rawQuestion || '').slice(0, 80)} ({examLabel}) | MUST PSC
+        </title>
+
+        <meta
+          name="description"
+          content={`Practice previous year question from ${examLabel}. Detailed explanation and answer available on MUST PSC.`}
+        />
+
         <meta name="google-site-verification" content="-UsCSZp4Ul3WtJydVJHoJHyIGvm1MlpiyUAGT3Qpq6U" />
       </Head>
 
