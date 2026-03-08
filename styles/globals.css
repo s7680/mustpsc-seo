@@ -1,42 +1,363 @@
+/* =========================================================
+   MUST PSC — Shared Design System (SEO Pages)
+   Matches mustpsc.in main website styling
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ===== RESET ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ===== DESIGN TOKENS (same as main site) ===== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --primary-light: #eff6ff;
+  --primary-xlight: #dbeafe;
+
+  --success: #16a34a;
+  --success-light: #dcfce7;
+
+  --gray-50:  #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --gray-900: #0f172a;
+
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.07);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+
+  --ease: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ===== BODY ===== */
+
+body{
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--gray-100);
+  color: var(--gray-800);
+  line-height: 1.6;
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
+/* ===== HEADER (same as mustpsc.in) ===== */
+header {
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 60%, #3b82f6 100%);
+  color: #fff;
+  padding: 0 20px;
+  height: 64px;
+  width: 100%;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.30);
 }
 
-a {
-  color: inherit;
+/* ===== FLOATING HOME SYMBOL (LEFT TOP) ===== */
+.floating-home-symbol {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 250;
+
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
   text-decoration: none;
+  line-height: 1;
+
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 12px;
+  padding: 8px 12px;
+
+  box-shadow:
+    0 4px 14px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.35);
+
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+.floating-home-symbol:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.30);
+}
+
+.site-header {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+}
+
+.site-header span,
+.site-header h1,
+.site-header .title {
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 10px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.28),
+    rgba(255,255,255,0.10)
+  );
+
+  border: 1px solid rgba(255,255,255,0.35);
+
+  box-shadow:
+    0 4px 18px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.35);
+}
+
+.site-header .title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.auth-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  background: rgba(255,255,255,0.18);
+  padding: 7px 14px;
+  border-radius: 99px;
+  border: 1px solid rgba(255,255,255,0.25);
+  transition: var(--ease);
+  backdrop-filter: blur(4px);
+}
+
+.auth-btn:hover {
+  background: rgba(255,255,255,0.30);
+}
+
+/* ===== MAIN CONTAINER ===== */
+
+.page-wrapper{
+  padding: 0 16px 24px 16px;
+}
+
+.container{
+  max-width:900px;
+  margin:0 auto;
+}
+
+/* ===== CARD (same as main platform) ===== */
+
+.card{
+  background:white;
+  padding:24px;
+  border-radius:var(--r-lg);
+  border:1px solid var(--gray-200);
+  box-shadow:var(--shadow-sm);
+  margin-bottom:18px;
+}
+
+/* ===== SUBJECT / TOPIC ===== */
+
+.subject-title{
+  font-size:26px;
+  font-weight:700;
+  color:var(--gray-900);
+  margin-bottom:6px;
+}
+
+.topic-subtitle{
+  font-size:15px;
+  color:var(--primary);
+  font-weight:500;
+  margin-bottom:18px;
+}
+
+/* ===== QUESTION ===== */
+
+.question-text{
+  font-size:19px;
+  font-weight:600;
+  margin-bottom:10px;
+}
+
+.exam-info{
+  font-size:13px;
+  color:var(--gray-500);
+  margin-bottom:20px;
+}
+
+/* ===== OPTIONS ===== */
+
+.option-card{
+  padding:14px 16px;
+  border:1.5px solid var(--gray-200);
+  border-radius:var(--r-sm);
+  margin-bottom:10px;
+  background:white;
+  transition:all var(--ease);
+}
+
+.option-card:hover{
+  border-color:var(--primary-xlight);
+  background:var(--primary-light);
+}
+
+/* Correct option highlight */
+
+.option-correct{
+  background:var(--success-light);
+  border-color:var(--success);
+  font-weight:600;
+  position:relative;
+}
+
+.option-correct::after{
+  content:"✓";
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform:translateY(-50%);
+  background:var(--success);
+  color:white;
+  font-size:12px;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ===== ANSWER BOX ===== */
+
+.answer-highlight{
+  background:var(--success-light);
+  border-left:4px solid var(--success);
+  padding:14px 18px;
+  border-radius:var(--r-sm);
+  font-weight:600;
+  margin-top:14px;
+}
+
+/* ===== EXPLANATION ===== */
+
+.explanation-card{
+  margin-top:18px;
+  background:var(--gray-50);
+  border-left:4px solid var(--primary);
+  padding:18px;
+  border-radius:var(--r-sm);
+}
+
+.explanation-title{
+  font-weight:700;
+  margin-bottom:6px;
+  color:var(--gray-900);
+}
+
+.explanation-text{
+  line-height:1.7;
+  color:var(--gray-700);
+}
+
+/* ===== CTA BUTTON ===== */
+
+.cta-practice{
+  display:inline-block;
+  margin-top:24px;
+  background:var(--primary);
+  color:white;
+  padding:12px 22px;
+  border-radius:var(--r-sm);
+  text-decoration:none;
+  font-weight:600;
+  transition:background var(--ease);
+}
+
+.cta-practice:hover{
+  background:var(--primary-dark);
+}
+
+/* ===== BREADCRUMB ===== */
+
+.breadcrumb{
+  font-size:13px;
+  color:var(--gray-500);
+  margin-bottom:12px;
+}
+
+/* ===== OPTIONS LIST WRAPPER ===== */
+.options-list{
+  list-style:none;
+  padding:0;
+  margin-bottom:25px;
+}
+
+/* ===== ANSWER BOX ===== */
+.answer-box{
+  margin-bottom:15px;
+  font-weight:600;
+  background:var(--success-light);
+  border-left:4px solid var(--success);
+  padding:10px 14px;
+  border-radius:var(--r-sm);
+}
+
+/* ===== CTA WRAPPER ===== */
+.cta-wrapper{
+  margin-top:30px;
+  text-align:center;
+}
+.css
+/* ===== TOP NAV TABS (exact style as mustpsc.in navigation) ===== */
+
+#bottomNav{
+  width:100%;
+  background:#ffffff;
+  border-bottom:1px solid var(--gray-200);
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  padding:10px 0;
+  font-size:14px;
+}
+
+/* tab links */
+#bottomNav a{
+  text-decoration:none;
+  color:var(--gray-500);
+  font-weight:500;
+  padding:6px 8px;
+  transition:color var(--ease);
+}
+
+/* hover like main site (only color change) */
+#bottomNav a:hover{
+  color:var(--primary);
 }
