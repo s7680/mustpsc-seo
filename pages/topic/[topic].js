@@ -31,6 +31,8 @@ export default function TopicPage({ questions, topic }) {
           name="description"
           content={`Practice MCQ questions on ${topic} with explanations.`}
         />
+        <link rel="canonical" href={`https://mustpsc.in/topic/${topic.replace(/\s+/g,'-')}`} />
+        <meta name="robots" content="noindex, follow" />
       </Head>
 
       <div className="container">

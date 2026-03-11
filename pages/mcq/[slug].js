@@ -50,6 +50,8 @@ export default function QuestionPage({ question }) {
           name="description"
           content={`Practice previous year question from ${examLabel}. Detailed explanation and answer available on MUST PSC.`}
         />
+        <link rel="canonical" href={`https://mustpsc.in/mcq/${question.slug}`} />
+        <meta name="robots" content="noindex, follow" />
 
         <script
           type="application/ld+json"
