@@ -1,7 +1,7 @@
 import supabase from '../lib/supabase'
 
 export const getServerSideProps = async ({ res }) => {
-  const siteUrl = 'https://seo.mustpsc.in'
+  const siteUrl = 'https://mustpsc.in'
 
   let questions = []
   let from = 0
@@ -41,6 +41,8 @@ export const getServerSideProps = async ({ res }) => {
     .map(t => `
       <url>
         <loc>${siteUrl}/topic/${t}</loc>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
       </url>
     `)
     .join('')
@@ -49,6 +51,8 @@ export const getServerSideProps = async ({ res }) => {
     .map(q => `
       <url>
         <loc>${siteUrl}/mcq/${q.slug}</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
       </url>
     `)
     .join('')
