@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import supabase from '../../lib/supabase'
+import { useRouter } from 'next/router'
 
 export async function getServerSideProps(context) {
 
@@ -10,15 +11,23 @@ export async function getServerSideProps(context) {
     .select('*')
     .eq('slug', slug)
     .limit(1)
+    .single()
+
+  if (!data) {
+    return {
+      notFound: true
+    }
+  }
 
   return {
     props: {
-      question: data?.[0] || null
+      question: data || null
     }
   }
 }
 
 export default function QuestionPage({ question }) {
+  const router = useRouter()
 
   if (!question) return <div>Question not found</div>
 
@@ -50,8 +59,14 @@ export default function QuestionPage({ question }) {
           name="description"
           content={`Practice previous year question from ${examLabel}. Detailed explanation and answer available on MUST PSC.`}
         />
-        <link rel="canonical" href={`https://mustpsc.in/mcq/${question.slug}`} />
-      
+        <link
+          rel="canonical"
+          href={`https://mustpsc.in/mcq/${question.slug}`}
+        />
+
+        {router.asPath.includes('?') && (
+          <meta name="robots" content="noindex,follow" />
+        )}
 
         <script
           type="application/ld+json"
