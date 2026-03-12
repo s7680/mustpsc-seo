@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import supabase from '../../lib/supabase'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export async function getServerSideProps(context) {
 
@@ -21,6 +22,15 @@ export async function getServerSideProps(context) {
 }
 
 export default function TopicPage({ questions, topic }) {
+  const router = useRouter()
+
+  // Redirect parameter / duplicate URLs to clean canonical topic URL
+  if (typeof window !== 'undefined') {
+    const cleanUrl = `https://mustpsc.in/topic/${topic.replace(/\s+/g,'-')}`
+    if (window.location.href !== cleanUrl && window.location.search) {
+      window.history.replaceState({}, '', cleanUrl)
+    }
+  }
 
   return (
     <div className="page-wrapper">
@@ -31,7 +41,21 @@ export default function TopicPage({ questions, topic }) {
           name="description"
           content={`Practice MCQ questions on ${topic} with explanations.`}
         />
-        <link rel="canonical" href={`https://mustpsc.in/topic/${topic.replace(/\s+/g,'-')}`} />
+        <link
+          rel="canonical"
+          href={`https://mustpsc.in/topic/${topic.replace(/\s+/g,'-')}`}
+        />
+        <meta name="robots" content="index,follow" />
+
+        {router.asPath.includes('?') && (
+          <>
+            <meta name="robots" content="noindex,follow" />
+            <link
+              rel="canonical"
+              href={`https://mustpsc.in/topic/${topic.replace(/\s+/g,'-')}`}
+            />
+          </>
+        )}
       
       </Head>
 

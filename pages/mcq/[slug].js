@@ -29,6 +29,14 @@ export async function getServerSideProps(context) {
 export default function QuestionPage({ question }) {
   const router = useRouter()
 
+  // Redirect parameter / duplicate URLs to clean canonical URL
+  if (typeof window !== 'undefined') {
+    const cleanUrl = `https://mustpsc.in/mcq/${question.slug}`
+    if (window.location.href !== cleanUrl && !window.location.search.includes('amp')) {
+      window.history.replaceState({}, '', cleanUrl)
+    }
+  }
+
   if (!question) return <div>Question not found</div>
 
   const subjectClean = question.subject
@@ -63,9 +71,16 @@ export default function QuestionPage({ question }) {
           rel="canonical"
           href={`https://mustpsc.in/mcq/${question.slug}`}
         />
+        <meta name="robots" content="index,follow" />
 
         {router.asPath.includes('?') && (
-          <meta name="robots" content="noindex,follow" />
+          <>
+            <meta name="robots" content="noindex,follow" />
+            <link
+              rel="canonical"
+              href={`https://mustpsc.in/mcq/${question.slug}`}
+            />
+          </>
         )}
 
         <script
